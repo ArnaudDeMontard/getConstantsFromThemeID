@@ -1,8 +1,16 @@
 //%attributes = {}
 //DOA_getConstantsFromTheme (groupID) -> coll
 //retourne les constantes du groupe (thème)
-//les constantes sont reconstituées par l'algo
-//au lieu d'être lues dans Resources
+//les constantes sont reconstituées par l'algo, 
+//plus rapide que la lecture en Resources
+
+//Au sein d'un thème, les id de constantes 
+//s'enchainent de façon incrémentale (1, 2, etc.)
+//avec parfois des "trous" quand une cste a été abandonnée. 
+//L'algo considère qu'au bout de 10 id sans cste
+//correspondante on a terminé le thème
+
+//© Arnaud * 18/10/2025 
 
 #DECLARE($themeID_l : Integer)->$constant_c : Collection
 
