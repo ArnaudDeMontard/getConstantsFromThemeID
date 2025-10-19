@@ -1,0 +1,23 @@
+//%attributes = {}
+//DOA_getConstantsFromTheme (groupID) -> coll
+//retourne les constantes du groupe (thème)
+
+#DECLARE($themeID_l : Integer)->$constant_c : Collection
+
+$constant_c:=[]
+$notFound:=0
+$enough:=10  //more than 10 missing id's -> exit loop
+For ($i; 0; 1000)  //max found 113… 
+	$token_t:=":K"+String:C10($themeID_l)+":"+String:C10($i)
+	$parsed_t:=Parse formula:C1576("@"+$token_t; Formula out with tokens:K88:3)
+	//remove "not a token" or obsolete
+	If (Position:C15("‘"; $parsed_t; *)=1) || (Position:C15("@"; $parsed_t; *)=1) || (Position:C15("_o_"; $parsed_t; *)=1)
+		$notFound+=1
+		If ($notFound<$enough)
+			continue
+		Else 
+			break
+		End if 
+	End if 
+	$constant_c.push({value: Formula from string:C1601($parsed_t).call(); constant: Parse formula:C1576($parsed_t); token: $token_t})
+End for 
