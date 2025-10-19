@@ -1,6 +1,8 @@
 //%attributes = {}
 //DOA_getConstantsFromTheme (groupID) -> coll
 //retourne les constantes du groupe (thème)
+//les constantes sont reconstituées par l'algo
+//au lieu d'être lues dans Resources
 
 #DECLARE($themeID_l : Integer)->$constant_c : Collection
 
